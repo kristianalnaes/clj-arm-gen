@@ -1,0 +1,70 @@
+(defn generate-arm-resource [name]          (generate-string {:condition
+"should deploy true/false"                            :apiVersion "standard"
+:type "resource type"                            :name name
+:location "west europe"                            :tags (parse-string
+(generate-string {:tag-name "tag-value"}))
+:comments "comments for reference"                            :copy
+(parse-string (generate-string {:name "name of copy loop"
+:count "int of iterations"
+:mode "serial or parallell"
+:batchSize "number to deploy serially"
+}))                            :dependsOn []
+:properties {}                            :resources ["array of child
+resources"]}))
+
+
+
+(defn generate-arm-output-name []          (generate-string {:type "type of
+output value"                            :value "output value expression"}))
+
+(defn generate-arm-output []          (generate-string {:outputName
+(generate-arm-output-name)}))
+
+(defn generate-arm-variable []                               (generate-string
+{:variable-name "variable-value"
+:<variable-name> (generate-string {:variable-complex-type-value ""})}))
+
+
+(defn generate-arm-resource [name]          (generate-string {:condition
+"should deploy true/false"                            :apiVersion "standard"
+:type "resource type"                            :name name
+:location "west europe"                            :tags (parse-string
+(generate-string {:tag-name "tag-value"}))
+:comments "comments for reference"                            :copy
+(parse-string (generate-string {:name "name of copy loop"
+:count "int of iterations"
+:mode "serial or parallell"
+:batchSize "number to deploy serially"
+}))                            :dependsOn []
+:properties {}                            :resources ["array of resources"]
+}))
+
+(defn generate-arm-parameter []          (generate-string {:type
+"<type-of-parameter-value"                            :defaultValue
+"<default-value-of-parameter>"                            :allowedValues
+["<array-of-allowed-values>"]                            :minValue "int"
+:maxValue "int"                            :minLength "int"
+:maxLength "int"                            :metadata (generate-string
+{:description "description-of-parameter"})} {:pretty true}))
+
+(defn arm-concat-parameters [a,b]          (clojure.string/join
+["[concat(parameters('" a "'), parameters('" b "'))]"]))
+
+(defn arm-concat-variables [a,b]          (clojure.string/join
+["[concat(variables('" a "'), variables('" b "'))]"]))
+
+(defn generate-arm-sku-capacity []          "generate an sku capacity"
+(generate-string {:type "int"                            :defaultValue 1
+:minValue 1}))
+
+(defn generate-arm-sku-name []          "generate sku name"
+(generate-string {:type "string"                            :defaultValue "F1"
+:allowedValues ["F1",           "D1",           "B1",           "B2",
+"B3",           "S1",           "S2",           "S3",           "P1",
+"P2",           "P3",           "P4"]}))
+
+(defn arm-parameter [parameter]          (clojure.string/join ["[parameters('"
+parameter "')]"]))
+
+
+
